@@ -1,0 +1,27 @@
+version: "2.1"
+
+services:
+
+  # ---------------------------------
+  # NGINX container
+  # ---------------------------------
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      # local setup
+      - ./local-setup/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./local-setup/nginx/sites-enabled:/etc/nginx/sites-enabled
+
+      # nginx log files
+      - ./.persistent_data/nginx:/var/log/nginx
+    ports:
+      - 80:80
+    extra_hosts:
+      # - 192.168.5.5:127.0.0.1
+      - 128.199.133.72:127.0.0.1
+    healthcheck:
+      test: nginx -t
+      interval: 5s
+      timeout: 3s
+      retries: 30
