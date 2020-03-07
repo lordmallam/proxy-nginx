@@ -14,7 +14,7 @@ services:
       - ./local-setup/nginx/sites-enabled:/etc/nginx/sites-enabled
 
       # nginx log files
-      - ./.persistent_data/nginx:/var/log/nginx
+      - ./persistent_data/nginx:/var/log/nginx
     ports:
       - 80:80
     extra_hosts:
