@@ -4,10 +4,10 @@ services:
 
   networks:
   # docker network create ${NETWORK_NAME}
-  internal:
-    external:
-      # if this isn't explicitly set it inherits from the containing folder name (aether or not)
-      name: trisiki_dev
+    internal:
+      external:
+        # if this isn't explicitly set it inherits from the containing folder name (aether or not)
+        name: trisiki_dev
 
   # ---------------------------------
   # NGINX container
