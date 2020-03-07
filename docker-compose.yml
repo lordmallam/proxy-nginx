@@ -2,6 +2,13 @@ version: "2.1"
 
 services:
 
+  networks:
+  # docker network create ${NETWORK_NAME}
+  internal:
+    external:
+      # if this isn't explicitly set it inherits from the containing folder name (aether or not)
+      name: trisiki_dev
+
   # ---------------------------------
   # NGINX container
   # ---------------------------------
@@ -14,12 +21,14 @@ services:
       - ./local-setup/nginx/sites-enabled:/etc/nginx/sites-enabled
 
       # nginx log files
-      - ./persistent_data/nginx:/var/log/nginx
+      - ./.persistent_data/nginx:/var/log/nginx
     ports:
       - 80:80
-    extra_hosts:
-      # - 192.168.5.5:127.0.0.1
-      - 128.199.133.72:127.0.0.1
+    networks:
+      - internal
+    # extra_hosts:
+    #   # - 192.168.5.5:127.0.0.1
+    #   - 128.199.133.72:127.0.0.1
     healthcheck:
       test: nginx -t
       interval: 5s
